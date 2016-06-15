@@ -25,7 +25,6 @@ public class TeamApi {
 
     @RequestMapping(path = "", method = RequestMethod.POST, produces = {"application/json"})
     public Team createTeam(@Valid @RequestBody Team team) {
-        System.out.println("got post request: " + team);
         return teamService.create(team);
     }
 }

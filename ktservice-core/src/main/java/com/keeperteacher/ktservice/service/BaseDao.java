@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public abstract class BaseDao<T extends PersistedObject> {
 
     private Class<T> persistentClass;
-    @Autowired private SessionFactory sessionFactory;
+    @Autowired protected SessionFactory sessionFactory;
 
     public BaseDao() {
         // reflection magic
