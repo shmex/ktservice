@@ -18,7 +18,7 @@ public class TeamApi {
 
     @Autowired private TeamService teamService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET, produces = {"application/json"})
     public List<Team> listTeams() {
         return teamService.list();
     }

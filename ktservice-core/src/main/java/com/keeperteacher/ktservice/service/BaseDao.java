@@ -26,28 +26,33 @@ public abstract class BaseDao<T extends PersistedObject> {
         return persistentClass;
     }
 
+    @Transactional(readOnly = true)
     public T findById(String id) {
         Session session = sessionFactory.openSession();
         return session.load(persistentClass, id);
     }
 
+    @Transactional(readOnly = true)
     public List<T> findAll() {
         Session session = sessionFactory.openSession();
         return session.createQuery("FROM " + persistentClass.getCanonicalName()).list();
     }
 
+    @Transactional
     public T create(T entity) {
         Session session = sessionFactory.openSession();
         session.save(entity);
         return entity;
     }
 
+    @Transactional
     public T update(T entity) {
         Session session = sessionFactory.openSession();
         session.update(entity);
         return entity;
     }
 
+    @Transactional
     public T delete(String id) {
         Session session = sessionFactory.openSession();
         T entity = session.load(persistentClass, id);

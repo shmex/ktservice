@@ -9,10 +9,4 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class TeamDao extends BaseDao<Team> {
-
-    @Override
-    @Transactional
-    public Team create(Team entity) {
-        return super.create(entity);
-    }
 }
