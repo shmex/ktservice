@@ -19,7 +19,7 @@
 
     <servlet-mapping>
         <servlet-name>ktservice-apis</servlet-name>
-        <url-pattern>/api/</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
