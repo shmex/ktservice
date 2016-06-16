@@ -23,6 +23,8 @@
         <hibernate.version>5.2.0.Final</hibernate.version>
         <postgres.version>9.1-901-1.jdbc4</postgres.version>
         <flyway.version>4.0.2</flyway.version>
+        <tomcat7.maven.plugin.version>2.0</tomcat7.maven.plugin.version>
+        <maven.war.plugin.version>2.6</maven.war.plugin.version>
     </properties>
 
     <dependencies>
@@ -100,6 +102,11 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
