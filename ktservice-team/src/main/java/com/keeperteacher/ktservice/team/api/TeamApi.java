@@ -1,6 +1,6 @@
 package com.keeperteacher.ktservice.team.api;
 
-import com.keeperteacher.ktservice.model.KTError;
+import com.keeperteacher.ktservice.exception.ResourceNotFoundException;
 import com.keeperteacher.ktservice.team.model.Team;
 import com.keeperteacher.ktservice.team.service.TeamService;
 import org.slf4j.Logger;
@@ -29,18 +29,18 @@ public class TeamApi {
     }
 
     @RequestMapping(path = "{teamId}", method = RequestMethod.GET)
-    public Team readTeam(@PathVariable String teamId) throws KTError {
+    public Team readTeam(@PathVariable("teamId") String teamId) throws ResourceNotFoundException {
         LOG.info("teamId: " + teamId);
         return teamService.read(teamId);
     }
 
     @RequestMapping(path = "{teamId}", method = RequestMethod.PUT)
-    public Team updateTeam(@PathVariable String teamId, @Valid @RequestBody Team team) {
+    public Team updateTeam(@PathVariable("teamId") String teamId, @Valid @RequestBody Team team) {
         return teamService.update(teamId, team);
     }
 
     @RequestMapping(path = "{teamId}", method = RequestMethod.DELETE)
-    public Team deleteTeam(@PathVariable String teamId) {
+    public Team deleteTeam(@PathVariable("teamId") String teamId) {
         return teamService.delete(teamId);
     }
 }

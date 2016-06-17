@@ -1,6 +1,6 @@
 package com.keeperteacher.ktservice.service;
 
-import com.keeperteacher.ktservice.model.KTError;
+import com.keeperteacher.ktservice.exception.ResourceNotFoundException;
 import com.keeperteacher.ktservice.model.PersistedObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,10 @@ public abstract class BaseService<T extends PersistedObject> {
     }
 
     @Transactional(readOnly = true)
-    public T read(String id) throws KTError {
+    public T read(String id) throws ResourceNotFoundException {
         T entity = baseDao.findById(id);
         if(entity == null) {
-            throw new KTError("Object not found!");
+            throw new ResourceNotFoundException("Could not find team with id: " + id);
         }
         return entity;
     }
