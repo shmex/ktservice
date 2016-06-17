@@ -25,6 +25,8 @@
         <flyway.version>4.0.2</flyway.version>
         <tomcat7.maven.plugin.version>2.0</tomcat7.maven.plugin.version>
         <maven.war.plugin.version>2.6</maven.war.plugin.version>
+        <dbcp.version>1.4</dbcp.version>
+        <slf4j.api.version>1.7.21</slf4j.api.version>
     </properties>
 
     <dependencies>
@@ -83,12 +85,33 @@
             <version>${postgres.version}</version>
         </dependency>
 
+        <!-- Dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${dbcp.version}</version>
+        </dependency>
+
         <!-- Flyway -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>${flyway.version}</version>
         </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+
+
     </dependencies>
 
 

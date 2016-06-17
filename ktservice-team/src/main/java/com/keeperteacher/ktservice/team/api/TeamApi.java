@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/teams")
+@RequestMapping(path = "/teams", produces = "application/json")
 public class TeamApi {
 
     @Autowired private TeamService teamService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Team> listTeams() {
         return teamService.list();
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public Team createTeam(@Valid @RequestBody Team team) {
         return teamService.create(team);
     }
