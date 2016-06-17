@@ -17,8 +17,8 @@ import javax.validation.constraints.Size;
 public class Team extends PersistedObject {
 
     @Column(name = "name")
-    @Size(min = 1, max = 255)
-    @NotNull
+    @Size(min = 1, max = 255, message = "Team name must be between 1 and 255 characters!")
+    @NotNull(message = "Team name is required!")
     @Pattern(regexp = ValidationProtocol.ALPHANUMERIC_WITH_SPACES_REGEX, message = "Team name must be alphanumeric!")
     private String name;
 
