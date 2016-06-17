@@ -10,12 +10,16 @@ import java.io.IOException;
 
 public class KtserviceExceptionSerializer extends JsonSerializer<KtserviceException> {
 
+    public static void writeKtserviceExceptionFields(KtserviceException e, JsonGenerator jsonGenerator) throws IOException {
+        jsonGenerator.writeStringField("message", e.getMessage());
+        jsonGenerator.writeNumberField("errorCode", e.getErrorCode());
+    }
+
     @Override
     public void serialize(KtserviceException e, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
         jsonGenerator.writeStartObject();
 
-        jsonGenerator.writeStringField("message", e.getMessage());
-        jsonGenerator.writeNumberField("errorCode", e.getErrorCode());
+        writeKtserviceExceptionFields(e, jsonGenerator);
 
         jsonGenerator.writeEndObject();
     }
