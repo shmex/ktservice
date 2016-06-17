@@ -22,7 +22,6 @@ public class Team extends PersistedObject {
     @Pattern(regexp = ValidationProtocol.ALPHANUMERIC_WITH_SPACES_REGEX, message = "Team name must be alphanumeric!")
     private String name;
 
-
     public String getName() {
         return name;
     }

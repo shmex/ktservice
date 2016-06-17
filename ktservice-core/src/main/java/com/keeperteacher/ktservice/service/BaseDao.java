@@ -3,6 +3,8 @@ package com.keeperteacher.ktservice.service;
 import com.keeperteacher.ktservice.model.PersistedObject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Repository
 public abstract class BaseDao<T extends PersistedObject> {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BaseDao.class);
     private Class<T> persistentClass;
     @Autowired protected SessionFactory sessionFactory;
 
@@ -27,7 +30,7 @@ public abstract class BaseDao<T extends PersistedObject> {
 
     public T findById(String id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.load(persistentClass, id);
+        return session.get(persistentClass, id);
     }
 
     public List<T> findAll() {
@@ -49,7 +52,7 @@ public abstract class BaseDao<T extends PersistedObject> {
 
     public T delete(String id) {
         Session session = sessionFactory.getCurrentSession();
-        T entity = session.load(persistentClass, id);
+        T entity = session.get(persistentClass, id);
         session.delete(entity);
         return entity;
     }

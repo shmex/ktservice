@@ -4,14 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Repository
 @MappedSuperclass
-@JsonPropertyOrder({"id", "created", "modified"})
+@JsonPropertyOrder({"self", "id", "created", "modified"})
 public class PersistedObject {
+
+    @Transient
+    private String self;
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -34,6 +39,10 @@ public class PersistedObject {
         this.created = new Date();
         this.modified = (Date) created.clone();
         this.deleted = false;
+    }
+
+    public String getSelf() {
+        return StringUtils.isEmpty(getId()) ? null : "/api/" + getClass().getSimpleName().toLowerCase() + "s/" + getId();
     }
 
     public String getId() {
