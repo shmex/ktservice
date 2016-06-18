@@ -1,5 +1,6 @@
 package com.keeperteacher.ktservice.content;
 
+import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.core.model.PersistedObject;
 
 import javax.persistence.Column;

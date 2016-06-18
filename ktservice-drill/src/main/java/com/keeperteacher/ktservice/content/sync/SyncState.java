@@ -1,8 +1,8 @@
-package com.keeperteacher.ktservice.content;
+package com.keeperteacher.ktservice.content.sync;
 
 public enum SyncState {
     WAITING,
-    SYNCHRONIZING,
+    UPLOADING,
     TRANSCODING,
     COMPLETED,
     FAILED,

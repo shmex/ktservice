@@ -1,6 +1,6 @@
 package com.keeperteacher.ktservice.video;
 
-import com.keeperteacher.ktservice.content.SyncState;
+import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.core.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
