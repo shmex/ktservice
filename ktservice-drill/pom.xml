@@ -17,6 +17,11 @@
             <artifactId>ktservice-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.keeperteacher</groupId>
+            <artifactId>ktservice-aws</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -4,6 +4,8 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.event.ProgressListener;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
@@ -34,10 +36,12 @@ public class AwsS3Service {
     public void refreshCredentials() {
         awsCredentials = new ProfileCredentialsProvider().getCredentials();
         s3client = new AmazonS3Client(awsCredentials);
+        s3client.setRegion(Region.getRegion(Regions.US_WEST_2));
     }
 
     public void uploadFile(String bucketName, String key, File file, ProgressListener progressListener) {
         TransferManager transferManager = new TransferManager(awsCredentials);
+        transferManager.getAmazonS3Client().setRegion(Region.getRegion(Regions.US_WEST_2));
 
         PutObjectRequest request = new PutObjectRequest(bucketName, key, file);
         request.setGeneralProgressListener(progressListener);
