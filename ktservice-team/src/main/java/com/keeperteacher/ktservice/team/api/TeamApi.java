@@ -1,6 +1,6 @@
 package com.keeperteacher.ktservice.team.api;
 
-import com.keeperteacher.ktservice.exception.ResourceNotFoundException;
+import com.keeperteacher.ktservice.core.exception.ResourceNotFoundException;
 import com.keeperteacher.ktservice.team.model.Team;
 import com.keeperteacher.ktservice.team.service.TeamService;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package com.keeperteacher.ktservice.service;
+package com.keeperteacher.ktservice.core.service;
 
-import com.keeperteacher.ktservice.exception.ResourceNotFoundException;
-import com.keeperteacher.ktservice.model.PersistedObject;
+import com.keeperteacher.ktservice.core.exception.ResourceNotFoundException;
+import com.keeperteacher.ktservice.core.model.PersistedObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

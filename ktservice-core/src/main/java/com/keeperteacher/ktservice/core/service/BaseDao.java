@@ -1,6 +1,6 @@
-package com.keeperteacher.ktservice.service;
+package com.keeperteacher.ktservice.core.service;
 
-import com.keeperteacher.ktservice.model.PersistedObject;
+import com.keeperteacher.ktservice.core.model.PersistedObject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;

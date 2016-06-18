@@ -1,10 +1,10 @@
-package com.keeperteacher.ktservice.serialize;
+package com.keeperteacher.ktservice.core.serialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.keeperteacher.ktservice.exception.KtserviceException;
+import com.keeperteacher.ktservice.core.exception.KtserviceException;
 
 import java.io.IOException;
 

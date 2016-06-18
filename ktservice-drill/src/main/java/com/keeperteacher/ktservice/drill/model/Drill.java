@@ -1,8 +1,8 @@
 package com.keeperteacher.ktservice.drill.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.keeperteacher.ktservice.model.PersistedObject;
-import com.keeperteacher.ktservice.model.ValidationProtocol;
+import com.keeperteacher.ktservice.core.model.PersistedObject;
+import com.keeperteacher.ktservice.core.model.ValidationProtocol;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

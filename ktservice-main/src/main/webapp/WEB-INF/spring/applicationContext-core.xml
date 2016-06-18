@@ -22,7 +22,7 @@
     </mvc:annotation-driven>
 
     <!-- Custom Object Mapper -->
-    <bean id="ktserviceObjectMapper" class="com.keeperteacher.ktservice.serialize.BaseObjectMapper"/>
+    <bean id="ktserviceObjectMapper" class="com.keeperteacher.ktservice.core.serialize.BaseObjectMapper"/>
 
     <!-- Database Configs -->
 

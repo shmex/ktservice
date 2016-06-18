@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.exception;
+package com.keeperteacher.ktservice.core.exception;
 
 public class ResourceNotFoundException extends KtserviceException {
 

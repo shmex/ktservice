@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.exception;
+package com.keeperteacher.ktservice.core.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

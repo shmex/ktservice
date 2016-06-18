@@ -2,7 +2,7 @@ package com.keeperteacher.ktservice.drill.api;
 
 import com.keeperteacher.ktservice.drill.model.Drill;
 import com.keeperteacher.ktservice.drill.service.DrillService;
-import com.keeperteacher.ktservice.exception.ResourceNotFoundException;
+import com.keeperteacher.ktservice.core.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

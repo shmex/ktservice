@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.model;
+package com.keeperteacher.ktservice.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

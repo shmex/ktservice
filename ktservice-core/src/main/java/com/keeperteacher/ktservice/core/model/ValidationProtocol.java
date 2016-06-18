@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.model;
+package com.keeperteacher.ktservice.core.model;
 
 public interface ValidationProtocol {
     String ALPHANUMERIC_WITH_SPACES_REGEX = "[a-zA-Z0-9 ]{1,255}$";

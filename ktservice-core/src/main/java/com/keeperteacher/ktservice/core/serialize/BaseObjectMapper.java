@@ -1,9 +1,9 @@
-package com.keeperteacher.ktservice.serialize;
+package com.keeperteacher.ktservice.core.serialize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.keeperteacher.ktservice.exception.KtserviceException;
-import com.keeperteacher.ktservice.exception.ValidationException;
+import com.keeperteacher.ktservice.core.exception.KtserviceException;
+import com.keeperteacher.ktservice.core.exception.ValidationException;
 
 public class BaseObjectMapper extends ObjectMapper {
 
