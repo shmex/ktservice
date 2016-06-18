@@ -21,4 +21,13 @@ public class Drill extends PersistedObject {
     @NotNull(message = "Drill name is required!")
     @Pattern(regexp = ValidationProtocol.ALPHANUMERIC_WITH_SPACES_REGEX, message = "Drill name must be alphanumeric!")
     private String name;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

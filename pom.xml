@@ -13,6 +13,7 @@
         <module>ktservice-main</module>
         <module>ktservice-team</module>
         <module>ktservice-drill</module>
+        <module>ktservice-aws</module>
     </modules>
 
     <properties>
@@ -28,6 +29,7 @@
         <maven.war.plugin.version>2.6</maven.war.plugin.version>
         <dbcp.version>1.4</dbcp.version>
         <slf4j.api.version>1.7.21</slf4j.api.version>
+        <aws.sdk.version>1.11.8</aws.sdk.version>
     </properties>
 
     <dependencies>
@@ -110,6 +112,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.api.version}</version>
+        </dependency>
+
+        <!-- Aws -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${aws.sdk.version}</version>
         </dependency>
 
 
