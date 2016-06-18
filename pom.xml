@@ -12,6 +12,7 @@
         <module>ktservice-core</module>
         <module>ktservice-main</module>
         <module>ktservice-team</module>
+        <module>ktservice-drill</module>
     </modules>
 
     <properties>
