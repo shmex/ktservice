@@ -59,6 +59,7 @@ public class AwsS3Service {
 
     public void deleteFile(String bucketName, String key) {
         DeleteObjectRequest request = new DeleteObjectRequest(bucketName, key);
+        s3client.deleteObject(request);
     }
 
     public void createFolder(String bucketName, String folderName) {

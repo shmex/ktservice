@@ -21,7 +21,6 @@ public class VideoApi {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/*")
     public Video test(@RequestParam("file") MultipartFile file) throws IOException {
-        LOG.info("received file: " + file.getOriginalFilename());
         Video video = new Video();
         video.setName(file.getOriginalFilename());
         video.setSyncState(SyncState.WAITING);

@@ -1,11 +1,12 @@
 package com.keeperteacher.ktservice.video;
 
 import com.keeperteacher.ktservice.core.service.BaseService;
-import com.keeperteacher.ktservice.video.upload.VideoSyncHandler;
+import com.keeperteacher.ktservice.video.sync.VideoSyncHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,6 +17,14 @@ public class VideoService extends BaseService<Video> {
 
     private static final Logger LOG = LoggerFactory.getLogger(VideoService.class);
     @Autowired private VideoSyncHandler videoSyncHandler;
+
+    @Override
+    @Transactional
+    public Video delete(String id) {
+        Video video = super.delete(id);
+        videoSyncHandler.deleteVideoOnAws(video);
+        return video;
+    }
 
     public void synchronizeVideo(Video video, byte[] fileData) throws IOException {
         File file = cacheVideo(video, fileData);

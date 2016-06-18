@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.video.upload;
+package com.keeperteacher.ktservice.video.sync;
 
 import com.keeperteacher.ktservice.aws.s3.AwsS3Service;
 import com.keeperteacher.ktservice.aws.s3.S3UploadProgress;
@@ -57,7 +57,9 @@ public class VideoSyncHandler {
         });
     }
 
-
+    public void deleteVideoOnAws(Video video) {
+        awsS3Service.deleteFile(BUCKET_NAME, video.getId());
+    }
 
     private void updateVideoAndDeleteCachedFile(Video video, File file) {
         videoService.update(video.getId(), video);

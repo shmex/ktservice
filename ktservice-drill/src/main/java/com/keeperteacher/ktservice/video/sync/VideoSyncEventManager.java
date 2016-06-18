@@ -1,4 +1,4 @@
-package com.keeperteacher.ktservice.video.upload;
+package com.keeperteacher.ktservice.video.sync;
 
 import com.keeperteacher.ktservice.content.sync.SyncStage;
 import com.keeperteacher.ktservice.content.sync.SyncStageFactory;
