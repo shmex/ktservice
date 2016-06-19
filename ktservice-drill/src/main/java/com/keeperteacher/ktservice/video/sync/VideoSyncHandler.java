@@ -4,6 +4,7 @@ import com.keeperteacher.ktservice.aws.s3.AwsS3Service;
 import com.keeperteacher.ktservice.aws.s3.S3UploadProgress;
 import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.content.sync.event.SyncEventFactory;
+import com.keeperteacher.ktservice.throttle.Throttle;
 import com.keeperteacher.ktservice.video.Video;
 import com.keeperteacher.ktservice.video.VideoService;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class VideoSyncHandler {
 
     @Async
     public void uploadFileToAws(Video video, File file) {
+        final Throttle throttle = new Throttle(3); // 1 times per second
         final S3UploadProgress progress = new S3UploadProgress(file.length());
         awsS3Service.uploadFile(BUCKET_NAME, video.getId(), file, progressEvent -> {
 
@@ -40,7 +42,9 @@ public class VideoSyncHandler {
                     break;
                 case REQUEST_BYTE_TRANSFER_EVENT:
                     progress.addBytesTransferred(progressEvent.getBytesTransferred());
-                    videoSyncEventManager.publish(syncEventFactory.createProgressEvent(video.getId(), progress.getPercentComplete()));
+                    throttle.throttledRun(() ->
+                        videoSyncEventManager.publish(syncEventFactory.createProgressEvent(video.getId(), progress.getPercentComplete()))
+                    );
                     break;
                 case TRANSFER_COMPLETED_EVENT:
                     video.setSyncState(SyncState.COMPLETED);

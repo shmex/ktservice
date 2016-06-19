@@ -14,6 +14,7 @@
         <module>ktservice-team</module>
         <module>ktservice-drill</module>
         <module>ktservice-aws</module>
+        <module>ktservice-throttle</module>
     </modules>
 
     <properties>
