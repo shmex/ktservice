@@ -4,6 +4,7 @@ import com.keeperteacher.ktservice.aws.s3.AwsS3Service;
 import com.keeperteacher.ktservice.aws.s3.S3UploadProgress;
 import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.content.sync.event.SyncEventFactory;
+import com.keeperteacher.ktservice.core.service.KtserviceProperties;
 import com.keeperteacher.ktservice.throttle.Throttle;
 import com.keeperteacher.ktservice.video.Video;
 import com.keeperteacher.ktservice.video.VideoService;
@@ -21,7 +22,7 @@ import java.io.File;
 public class VideoSyncHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(VideoSyncHandler.class);
-    private static final String BUCKET_NAME = "ktservice-test";
+    @Autowired private KtserviceProperties ktserviceProperties;
     @Autowired private VideoService videoService;
     @Autowired private AwsS3Service awsS3Service;
     @Autowired private VideoSyncEventManager videoSyncEventManager;
@@ -29,9 +30,10 @@ public class VideoSyncHandler {
 
     @Async
     public void uploadFileToAws(Video video, File file) {
-        final Throttle throttle = new Throttle(3); // 1 times per second
+        int throttleFrequency = Integer.parseInt(ktserviceProperties.getProperty(KtserviceProperties.VIDEO_SYNC_EVENT_THROTTLE_FREQUENCY));
+        final Throttle throttle = new Throttle(throttleFrequency); // 1 times per second
         final S3UploadProgress progress = new S3UploadProgress(file.length());
-        awsS3Service.uploadFile(BUCKET_NAME, video.getId(), file, progressEvent -> {
+        awsS3Service.uploadFile(getBucketName(), video.getId(), file, progressEvent -> {
 
             SyncState originalState = video.getSyncState();
 
@@ -67,15 +69,19 @@ public class VideoSyncHandler {
     }
 
     public void deleteVideoOnAws(Video video) {
-        awsS3Service.deleteFile(BUCKET_NAME, video.getId());
+        awsS3Service.deleteFile(getBucketName(), video.getId());
     }
 
     public String getBucketName() {
-        return BUCKET_NAME;
+        return ktserviceProperties.getProperty(KtserviceProperties.VIDEO_SYNC_BUCKET_NAME);
+    }
+
+    public String getBaseUrl() {
+        return ktserviceProperties.getProperty(KtserviceProperties.VIDEO_SYNC_BASE_URL);
     }
 
     public String getUrlForVideo(Video video) {
-        return String.format("http://bogus.bo/%s/%s", getBucketName(), video.getId());
+        return String.format("%s/%s/%s", getBaseUrl(), getBucketName(), video.getId());
     }
 
     private void updateVideoAndDeleteCachedFile(Video video, File file) {
