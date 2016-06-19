@@ -22,7 +22,7 @@ public class VideoSyncEventManager {
                 break;
             case PROGRESS_EVENT:
                 ProgressEvent progressEvent = (ProgressEvent) syncEvent;
-                LOG.info(String.format("Video: %s progress: %,.2f%%", progressEvent.getVideoId(), progressEvent.getProgress()));
+                LOG.info(String.format("Video: %s state: %s progress: %,.2f%%", progressEvent.getVideoId(), progressEvent.getSyncState(), progressEvent.getProgress()));
                 break;
         }
     }

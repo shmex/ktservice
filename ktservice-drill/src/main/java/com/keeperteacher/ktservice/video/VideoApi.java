@@ -2,6 +2,7 @@ package com.keeperteacher.ktservice.video;
 
 import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.core.exception.ResourceNotFoundException;
+import com.keeperteacher.ktservice.video.sync.VideoSyncEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import java.util.List;
 public class VideoApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(VideoApi.class);
-    @Autowired
-    private VideoService videoService;
+    @Autowired private VideoService videoService;
+    @Autowired private VideoSyncEngine videoSyncEngine;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/*")
     public Video test(@RequestParam("file") MultipartFile file) throws IOException {
@@ -26,7 +27,7 @@ public class VideoApi {
         video.setSyncState(SyncState.WAITING);
 
         video = videoService.create(video);
-        videoService.synchronizeVideo(video, file.getBytes());
+        videoSyncEngine.synchronize(video, file.getBytes());
 
         return video;
     }

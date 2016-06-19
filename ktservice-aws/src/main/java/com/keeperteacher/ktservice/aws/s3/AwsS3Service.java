@@ -12,6 +12,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.transfer.Transfer;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import org.slf4j.Logger;
@@ -39,7 +40,7 @@ public class AwsS3Service {
         s3client.setRegion(Region.getRegion(Regions.US_WEST_2));
     }
 
-    public void uploadFile(String bucketName, String key, File file, ProgressListener progressListener) {
+    public void uploadFile(String bucketName, String key, File file, ProgressListener progressListener) throws AwsS3TransferFailedException, InterruptedException {
         TransferManager transferManager = new TransferManager(awsCredentials);
         transferManager.getAmazonS3Client().setRegion(Region.getRegion(Regions.US_WEST_2));
 
@@ -48,12 +49,9 @@ public class AwsS3Service {
 
         Upload upload = transferManager.upload(request);
 
-        try {
-            upload.waitForCompletion();
-        } catch (AmazonClientException e) {
-            LOG.error("Upload failed! " + e);
-        } catch (InterruptedException e) {
-            LOG.error("Upload wait for completion interrupted: " + e);
+        upload.waitForCompletion();
+        if(upload.getState() != Transfer.TransferState.Completed) {
+            throw new AwsS3TransferFailedException();
         }
     }
 
