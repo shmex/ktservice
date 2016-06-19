@@ -5,6 +5,7 @@ import com.keeperteacher.ktservice.core.model.PersistedObject;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 @MappedSuperclass
 public class Content extends PersistedObject {
@@ -12,7 +13,7 @@ public class Content extends PersistedObject {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "url")
+    @Transient
     private String url;
 
     @Column(name = "syncState")

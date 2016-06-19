@@ -70,6 +70,14 @@ public class VideoSyncHandler {
         awsS3Service.deleteFile(BUCKET_NAME, video.getId());
     }
 
+    public String getBucketName() {
+        return BUCKET_NAME;
+    }
+
+    public String getUrlForVideo(Video video) {
+        return String.format("http://bogus.bo/%s/%s", getBucketName(), video.getId());
+    }
+
     private void updateVideoAndDeleteCachedFile(Video video, File file) {
         videoService.update(video.getId(), video);
         videoService.deleteCachedVideo(file);
