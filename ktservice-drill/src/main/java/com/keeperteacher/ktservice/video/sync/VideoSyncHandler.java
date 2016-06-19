@@ -31,13 +31,12 @@ public class VideoSyncHandler {
         final S3UploadProgress progress = new S3UploadProgress(file.length());
         awsS3Service.uploadFile(BUCKET_NAME, video.getId(), file, progressEvent -> {
 
-            SyncState oldState = video.getSyncState();
+            SyncState originalState = video.getSyncState();
 
             switch(progressEvent.getEventType()) {
                 case TRANSFER_STARTED_EVENT:
                     video.setSyncState(SyncState.UPLOADING);
                     videoService.update(video.getId(), video);
-                    videoSyncEventManager.publish(syncEventFactory.createStateTransitionEvent(video.getId(), oldState, video.getSyncState()));
                     break;
                 case REQUEST_BYTE_TRANSFER_EVENT:
                     progress.addBytesTransferred(progressEvent.getBytesTransferred());
@@ -46,18 +45,19 @@ public class VideoSyncHandler {
                 case TRANSFER_COMPLETED_EVENT:
                     video.setSyncState(SyncState.COMPLETED);
                     updateVideoAndDeleteCachedFile(video, file);
-                    videoSyncEventManager.publish(syncEventFactory.createStateTransitionEvent(video.getId(), oldState, video.getSyncState()));
                     break;
                 case TRANSFER_FAILED_EVENT:
                     video.setSyncState(SyncState.FAILED);
                     updateVideoAndDeleteCachedFile(video, file);
-                    videoSyncEventManager.publish(syncEventFactory.createStateTransitionEvent(video.getId(), oldState, video.getSyncState()));
                     break;
                 case TRANSFER_CANCELED_EVENT:
                     video.setSyncState(SyncState.CANCELED);
                     updateVideoAndDeleteCachedFile(video, file);
-                    videoSyncEventManager.publish(syncEventFactory.createStateTransitionEvent(video.getId(), oldState, video.getSyncState()));
                     break;
+            }
+
+            if(originalState != video.getSyncState()) {
+                videoSyncEventManager.publish(syncEventFactory.createStateTransitionEvent(video.getId(), originalState, video.getSyncState()));
             }
         });
     }
