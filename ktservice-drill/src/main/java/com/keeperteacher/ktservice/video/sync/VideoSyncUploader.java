@@ -50,5 +50,6 @@ public class VideoSyncUploader {
 
     public void deleteVideoOnAws(Video video) {
         awsS3Service.deleteFile(videoSyncConfigService.getBucketName(), video.getId());
+        awsS3Service.deleteFolder(videoSyncConfigService.getBucketName(), video.getId());
     }
 }

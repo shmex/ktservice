@@ -1,7 +1,9 @@
 package com.keeperteacher.ktservice.video.sync;
 
+import com.keeperteacher.ktservice.aws.elastictranscoder.AwsElasticTranscoderService;
 import com.keeperteacher.ktservice.content.sync.SyncState;
 import com.keeperteacher.ktservice.content.sync.event.SyncEventFactory;
+import com.keeperteacher.ktservice.core.service.KtserviceProperties;
 import com.keeperteacher.ktservice.video.Video;
 import com.keeperteacher.ktservice.video.VideoService;
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ public class VideoSyncEngine {
     private static final Logger LOG = LoggerFactory.getLogger(VideoSyncEngine.class);
     @Autowired private VideoService videoService;
     @Autowired private VideoSyncUploader videoSyncUploader;
+    @Autowired private VideoSyncTranscoder videoSyncTranscoder;
     @Autowired private VideoSyncEventManager videoSyncEventManager;
     @Autowired private SyncEventFactory syncEventFactory;
 
@@ -68,6 +71,8 @@ public class VideoSyncEngine {
 
     private void transcode(Video video) {
         performStateTransition(video, SyncState.TRANSCODING);
+        videoSyncTranscoder.transcodeToWebm(video);
+        videoSyncTranscoder.transcodeToHLS(video);
     }
 
     private void performStateTransition(Video video, SyncState syncState) {

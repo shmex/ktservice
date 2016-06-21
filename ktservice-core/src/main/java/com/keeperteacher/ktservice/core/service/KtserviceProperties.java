@@ -17,6 +17,12 @@ public class KtserviceProperties {
     public static final String VIDEO_SYNC_EVENT_THROTTLE_FREQUENCY = "video.sync.event.throttle.frequency";
     public static final String VIDEO_SYNC_BUCKET_NAME = "video.sync.bucket.name";
     public static final String VIDEO_SYNC_BASE_URL = "video.sync.base.url";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_PIPELINE_ID = "video.sync.elastic.transcoder.pipeline.id";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_WEBM_PRESET_ID = "video.sync.elastic.transcoder.webm.preset.id";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_HLS_400K_PRESET_ID = "video.sync.elastic.transcoder.hls.400k.preset.id";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_HLS_1M_PRESET_ID = "video.sync.elastic.transcoder.hls.1M.preset.id";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_HLS_2M_PRESET_ID = "video.sync.elastic.transcoder.hls.2M.preset.id";
+    public static final String VIDEO_SYNC_ELASTIC_TRANSCODER_HLS_SEGMENT_DURATION = "video.sync.elastic.transcoder.hls.segment.duration";
 
     public KtserviceProperties() throws IOException {
         refreshProperties();
