@@ -18,9 +18,10 @@ public class AwsElasticTranscoderService {
     private AmazonElasticTranscoder amazonElasticTranscoder;
 
     public AwsElasticTranscoderService() {
+        Region region = Region.getRegion(Regions.US_WEST_2);
         credentials = new ProfileCredentialsProvider().getCredentials();
         amazonElasticTranscoder = new AmazonElasticTranscoderClient(credentials);
-        amazonElasticTranscoder.setRegion(Region.getRegion(Regions.US_WEST_2));
+        amazonElasticTranscoder.setRegion(region);
     }
 
     public void transcode(String pipelineId, String outputKeyPrefix, JobInput input, CreateJobOutput output) {
