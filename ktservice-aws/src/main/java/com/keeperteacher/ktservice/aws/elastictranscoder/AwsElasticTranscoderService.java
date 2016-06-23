@@ -31,7 +31,7 @@ public class AwsElasticTranscoderService {
         createJobRequest.setInput(input);
         createJobRequest.setOutput(output);
 
-        CreateJobResult result = amazonElasticTranscoder.createJob(createJobRequest);
+        amazonElasticTranscoder.createJob(createJobRequest);
     }
 
     public void transcode(String pipelineId, String outputKeyPrefix, JobInput input, Set<CreateJobOutput> outputs, Set<CreateJobPlaylist> playlists) {
@@ -42,6 +42,6 @@ public class AwsElasticTranscoderService {
         createJobRequest.setOutputs(outputs);
         createJobRequest.setPlaylists(playlists);
 
-        CreateJobResult result = amazonElasticTranscoder.createJob(createJobRequest);
+        amazonElasticTranscoder.createJob(createJobRequest);
     }
 }
