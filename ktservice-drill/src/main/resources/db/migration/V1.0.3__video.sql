@@ -1,5 +1,5 @@
 CREATE TABLE ktservice_video (
-  id VARCHAR(255) PRIMARY KEY,
+  id CHAR(32) PRIMARY KEY,
   created TIMESTAMP NOT NULL,
   modified TIMESTAMP NOT NULL,
   deleted BOOLEAN NOT NULL,

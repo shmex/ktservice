@@ -19,7 +19,7 @@ public class PersistedObject {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     @Column(name = "id")
     private String id;
 
